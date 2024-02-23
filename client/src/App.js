@@ -1,8 +1,8 @@
 import React from "react";
-import Register from "./components/Register";
+import Home from "./components/Home";
 
 function App() {
-  return <Register />;
+  return <Home />;
 }
 
 export default App;
