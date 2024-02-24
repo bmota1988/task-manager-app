@@ -1,7 +1,10 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Nav from "react-bootstrap/Nav";
+import Stack from "react-bootstrap/esm/Stack";
 import { useState } from "react";
+import { LinkContainer } from "react-router-bootstrap";
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -31,15 +34,24 @@ const Login = () => {
           required
         />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="loginForm.login">
+      <Form.Group className="mb-4" controlId="loginForm.login">
         <Button className="d-grid mx-auto" variant="primary" type="submit">
           Login
         </Button>
       </Form.Group>
-      <p className="text-center">
-        If you are not registered <a href="./Register.js">click here </a>to
-        register.
-      </p>
+      <Stack className="col-md-8 mx-auto" direction="horizontal" gap={2}>
+        <div>
+          <LinkContainer to="/register">
+            <Nav.Link>Go to register</Nav.Link>
+          </LinkContainer>
+        </div>
+        <div className="vr"></div>
+        <div>
+          <LinkContainer to="/">
+            <Nav.Link>Back to home</Nav.Link>
+          </LinkContainer>
+        </div>
+      </Stack>
     </Form>
   );
 };
