@@ -6,7 +6,7 @@ import { LinkContainer } from "react-router-bootstrap";
 const NavComponent = () => {
   return (
     <div>
-      <Navbar expand="lg" className="bg-body-tertiary">
+      <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
         <LinkContainer to="/">
           <Navbar.Brand>
             <span class="material-symbols-outlined">task</span>Task Manager App
