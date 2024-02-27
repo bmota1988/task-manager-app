@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import NavComponent from "./NavComponent";
 import CarouselComponent from "./CarouselComponent";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   // useState a hook to catch the value of input form
@@ -14,11 +16,27 @@ const Register = () => {
     password: "",
   });
 
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:3001/register", form)
+      .then((result) => {
+        console.log(result);
+        navigate("/login");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <NavComponent />
       <CarouselComponent />
-      <Form className="w-25 position-absolute top-50 start-50 translate-middle bg-body-secondary rounded p-5">
+      <Form
+        className="w-25 position-absolute top-50 start-50 translate-middle bg-body-secondary rounded p-5"
+        onSubmit={handleSubmit}
+      >
         <h1 className="text-center mb-3">Register</h1>
         <Form.Group className="mb-3" controlId="registerForm.firstName">
           <Form.Label>First Name</Form.Label>
