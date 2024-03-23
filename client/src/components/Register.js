@@ -1,13 +1,12 @@
-import React from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import { useState } from "react";
-import NavComponent from "./NavComponent";
-import CarouselComponent from "./CarouselComponent";
-import axios from "axios";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import NavComponent from "./NavComponent";
 
 const Register = () => {
+  // useNavigate to navigate among pages
+  const navigate = useNavigate();
+
   // useState a hook to catch the value of input form
   const [form, setForm] = useState({
     firstName: "",
@@ -16,82 +15,103 @@ const Register = () => {
     password: "",
   });
 
-  const navigate = useNavigate();
+  const { firstName, lastName, email, password } = form;
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/register", form)
-      .then((result) => {
-        console.log(result);
-        navigate("/login");
-      })
-      .catch((err) => console.log(err));
+    try {
+      const { data } = await axios.post(
+        "http://localhost:4000/register",
+        {
+          ...form,
+        },
+        { withCredentials: true }
+      );
+      const { success, message } = data;
+      if (success) {
+        alert(message);
+        setTimeout(() => {
+          navigate("/login");
+        }, 1000);
+      } else {
+        alert(message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setForm({
+      ...form,
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    });
   };
 
   return (
     <>
       <NavComponent />
-      <CarouselComponent />
-      <Form
+
+      <form
         className="w-25 position-absolute top-50 start-50 translate-middle bg-body-secondary rounded p-5"
         onSubmit={handleSubmit}
       >
         <h1 className="text-center mb-3">Register</h1>
-        <Form.Group className="mb-3" controlId="registerForm.firstName">
-          <Form.Label>First Name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="First Name"
-            value={form.firstName}
-            onChange={(e) => {
-              setForm({ ...form, firstName: e.target.value });
-            }}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="registerForm.lastName">
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Last Name"
-            value={form.lastName}
-            onChange={(e) => {
-              setForm({ ...form, lastName: e.target.value });
-            }}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="registerForm.email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={(e) => {
-              setForm({ ...form, email: e.target.value });
-            }}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="registerForm.password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={(e) => {
-              setForm({ ...form, password: e.target.value });
-            }}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-4" controlId="registerForm.register">
-          <Button className="d-grid mx-auto" variant="primary" type="submit">
-            Register
-          </Button>
-        </Form.Group>
-      </Form>
+        <label htmlFor="firstName">First Name</label>
+        <input
+          type="text"
+          className="form-control mb-3"
+          placeholder="First Name"
+          name="firstName"
+          value={firstName}
+          onChange={handleOnChange}
+          autoComplete="firstName"
+          required
+        />
+        <label htmlFor="lastName">Last Name</label>
+        <input
+          type="text"
+          className="form-control mb-3"
+          placeholder="Last Name"
+          name="lastName"
+          value={lastName}
+          onChange={handleOnChange}
+          autoComplete="lastName"
+          required
+        />
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          className="form-control mb-3"
+          placeholder="Email"
+          name="email"
+          value={email}
+          onChange={handleOnChange}
+          autoComplete="email"
+          required
+        />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          className="form-control mb-3"
+          placeholder="Password"
+          name="password"
+          value={password}
+          onChange={handleOnChange}
+          autoComplete="password"
+          required
+        />
+        <button className="btn btn-primary d-grid mx-auto" type="submit">
+          Register
+        </button>
+      </form>
     </>
   );
 };

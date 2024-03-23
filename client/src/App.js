@@ -1,20 +1,18 @@
 import React from "react";
-import Home from "./components/Home";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import TaskHome from "./components/TaskHome";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route exact path="/" Component={Home} />
-        <Route path="/register" Component={Register} />
-        <Route path="/login" Component={Login} />
-        <Route path="/main" Component={TaskHome} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<TaskHome />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
