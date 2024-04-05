@@ -2,6 +2,12 @@ const User = require("../models/userModel");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
+const { requiresAuth } = require("express-openid-connect");
+
+app.get("/profile", requiresAuth(), (req, res) => {
+  res.send(JSON.stringify(req.oidc.user));
+});
+
 module.exports.userVerification = (req, res) => {
   const token = req.cookies.token;
   if (!token) {
