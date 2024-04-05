@@ -1,6 +1,6 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import NavComponent from "./NavComponent";
 
 const Login = () => {
@@ -37,7 +37,7 @@ const Login = () => {
       if (success) {
         alert(message);
         setTimeout(() => {
-          navigate("/");
+          navigate("/home");
         }, 1000);
       } else {
         alert(message);

@@ -1,13 +1,11 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import NavComponent from "./NavComponent";
 
 const Register = () => {
-  // useNavigate to navigate among pages
   const navigate = useNavigate();
 
-  // useState a hook to catch the value of input form
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",

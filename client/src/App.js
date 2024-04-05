@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Register from "./components/Register";
 import Login from "./components/Login";
+import Register from "./components/Register";
 import TaskHome from "./components/TaskHome";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<TaskHome />} />
+        <Route path="/home" element={<TaskHome />} />
       </Routes>
     </BrowserRouter>
   );
