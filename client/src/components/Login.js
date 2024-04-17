@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import NavComponent from "./NavComponent";
 
@@ -54,40 +55,50 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <>
       <NavComponent />
-      <form
-        className="w-25 position-absolute top-50 start-50 translate-middle bg-body-secondary rounded p-5"
-        onSubmit={handleSubmit}
+
+      <Form
+        className="w-25 position-absolute top-50 start-50 
+      translate-middle bg-body-secondary shadow rounded p-5"
       >
         <h1 className="text-center mb-3">Login</h1>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          className="form-control mb-3"
-          placeholder="Email"
-          name="email"
-          value={email}
-          onChange={handleOnChange}
-          autoComplete="email"
-          required
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          className="form-control mb-3"
-          placeholder="Password"
-          name="password"
-          value={password}
-          onChange={handleOnChange}
-          autoComplete="password"
-          required
-        />
-        <button className="btn btn-primary d-grid mx-auto" type="submit">
-          Login
-        </button>
-      </form>
-    </div>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            value={email}
+            onChange={handleOnChange}
+            required
+          />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={handleOnChange}
+            required
+          />
+        </Form.Group>
+        <Button
+          className="w-100"
+          variant="primary"
+          type="submit"
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
+      </Form>
+    </>
   );
 };
 

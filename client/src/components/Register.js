@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import NavComponent from "./NavComponent";
 
@@ -57,59 +58,68 @@ const Register = () => {
     <>
       <NavComponent />
 
-      <form
-        className="w-25 position-absolute top-50 start-50 translate-middle bg-body-secondary rounded p-5"
-        onSubmit={handleSubmit}
+      <Form
+        className="w-25 position-absolute top-50 start-50
+       translate-middle bg-body-secondary shadow rounded p-5"
       >
         <h1 className="text-center mb-3">Register</h1>
-        <label htmlFor="firstName">First Name</label>
-        <input
-          type="text"
-          className="form-control mb-3"
-          placeholder="First Name"
-          name="firstName"
-          value={firstName}
-          onChange={handleOnChange}
-          autoComplete="firstName"
-          required
-        />
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          type="text"
-          className="form-control mb-3"
-          placeholder="Last Name"
-          name="lastName"
-          value={lastName}
-          onChange={handleOnChange}
-          autoComplete="lastName"
-          required
-        />
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          className="form-control mb-3"
-          placeholder="Email"
-          name="email"
-          value={email}
-          onChange={handleOnChange}
-          autoComplete="email"
-          required
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          className="form-control mb-3"
-          placeholder="Password"
-          name="password"
-          value={password}
-          onChange={handleOnChange}
-          autoComplete="password"
-          required
-        />
-        <button className="btn btn-primary d-grid mx-auto" type="submit">
-          Register
-        </button>
-      </form>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>First Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="First Name"
+            name="firstName"
+            value={firstName}
+            onChange={handleOnChange}
+            required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Last Name"
+            name="lastName"
+            value={lastName}
+            onChange={handleOnChange}
+            required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            value={email}
+            onChange={handleOnChange}
+            required
+          />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={handleOnChange}
+            required
+          />
+        </Form.Group>
+        <Button
+          className="w-100"
+          variant="primary"
+          type="submit"
+          onClick={handleSubmit}
+        >
+          {" "}
+          Submit{" "}
+        </Button>
+      </Form>
     </>
   );
 };
